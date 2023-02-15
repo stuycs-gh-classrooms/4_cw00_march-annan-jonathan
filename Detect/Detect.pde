@@ -66,10 +66,22 @@ int getIndexFromXY(int x, int y, PImage img) {
 }//getIndexFromXY
 
 
-PImage highlightRed(PImage img) {
+PImage highlightReds(PImage img) {
   PImage newImg = new PImage(img.width, img.height);
+  for (int x = 0; x < img.width; x++) {
+    for (int y = 0; y < img.height; y++) {
+      int index = getIndexFromXY(x, y, img);
+      color c = img.pixels[index];
+      if (red(c) > max(green(c), blue(c))) {
+        newImg.pixels[index] = c;
+      } else {
+        newImg.pixels[index] = color(255);
+      }
+    }
+  }
+  newImg.updatePixels();
   return newImg;
-}//higlightRed
+} 
 
 
 
